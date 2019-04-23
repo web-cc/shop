@@ -10,7 +10,7 @@ var cartRouter = require('./routes/cart');
 var categoryRouter = require('./routes/category');
 var checkoutRouter = require('./routes/checkout');
 var loginRouter = require('./routes/login');
-var singleProductRouter = require('./routes/singleProduct');
+var singleProductRouter = require('./routes/single-product');
 
 var app = express();
 
