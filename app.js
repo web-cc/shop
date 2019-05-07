@@ -5,13 +5,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var cartRouter = require('./routes/cart');
-var categoryRouter = require('./routes/category');
-var checkoutRouter = require('./routes/checkout');
-var loginRouter = require('./routes/login');
-var singleProductRouter = require('./routes/product');
-
+// var usersRouter = require('./routes/user');
+// var productRouter = require('./routes/product');
+// var topProductRouter = require('./routes/topProduct');
 var app = express();
 
 // view engine setup
@@ -25,13 +21,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/index', indexRouter);
-app.use('/users', usersRouter);
-app.use('/cart',cartRouter);
-app.use('/category',categoryRouter);
-app.use('/checkout',checkoutRouter);
-app.use('/login',loginRouter);
-app.use('/product',singleProductRouter);
+// app.use('/index', indexRouter);
+// app.use('/user', usersRouter);
+// app.use('/product', productRouter);
+// app.use('/topProduct', topProductRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -40,7 +33,7 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in developmxent
+  // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
