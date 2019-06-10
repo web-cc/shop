@@ -18,7 +18,7 @@ router.getIndex = (req, res, next) => {
   var to = req.query.to;
   console.log(from);
   console.log(to);
-  con.query('select * from categories WHERE status = 1', function (err, rows, fields) {
+  con.query('select * from categories ', function (err, rows, fields) {
     if (err) throw err
   
     rows.forEach(element => {
@@ -27,7 +27,7 @@ router.getIndex = (req, res, next) => {
     })
   });
   if (from == undefined && to == undefined){
-    con.query('select * from products WHERE status = 1', function (err, rows, fields) {
+    con.query('select * from products ', function (err, rows, fields) {
       if (err) throw err
     
       rows.forEach(element => {
@@ -38,7 +38,7 @@ router.getIndex = (req, res, next) => {
     });
   }
   else if (from == undefined ){
-    con.query('select * from products WHERE status = 1 and price > '+to , function (err, rows, fields) {
+    con.query('select * from products  > '+to , function (err, rows, fields) {
       if (err) throw err
     
       rows.forEach(element => {
@@ -68,7 +68,7 @@ router.getSearch = (req, res, next) => {
   console.log(name);
   
   if (name == undefined){
-    con.query('select * from products WHERE status = 1', function (err, rows, fields) {
+    con.query('select * from products ', function (err, rows, fields) {
       if (err) throw err
     
       rows.forEach(element => {
@@ -79,7 +79,7 @@ router.getSearch = (req, res, next) => {
     });
   }
   else{
-    con.query('select * from products WHERE status = 1 and lower(name) like lower("%'+name+'%")' , function (err, rows, fields) {
+    con.query('select * from products lower(name) like lower("%'+name+'%")' , function (err, rows, fields) {
       if (err) throw err
     
       rows.forEach(element => {
