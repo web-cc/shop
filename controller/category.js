@@ -19,7 +19,7 @@ con.query('select * from categories', function (err, rows, fields) {
 router.list = (req, res, next) => {
   let categories = [];
   categories = categoriesAll;
-  res.render('category/index',{categories : categories,user: req.user});
+  res.render('category/category',{categories : categories,user: req.user});
 };
 
 router.create = (req, res, next) => {
@@ -33,7 +33,7 @@ router.create = (req, res, next) => {
   console.log(id);
   console.log(name);
   if(id == 0){
-    let sql='INSERT INTO categories(name, status, description) VALUES ("'+name+'","'+description+'")';
+    let sql='INSERT INTO categories(name, description) VALUES ("'+name+'","'+description+'")';
     con.query(sql);
   }
   else{
@@ -57,14 +57,7 @@ router.changeStatus = (req, res, next) => {
   let x, r;
   let sqlselect = "select * from categories where id="+id;
   con.query(sqlselect, function(err, results, fields){
-    x = results[0].status;
-    if(x == 1){
-      r = 0;
-    }
-    else{
-      r = 1;
-    }
-    let sql = 'UPDATE categories SET status='+r+' WHERE id='+id;
+    let sql = 'UPDATE categories WHERE id='+id;
     con.query(sql);
     categoriesAll = [];
     con.query('select * from categories', function (err, rows, fields) {
