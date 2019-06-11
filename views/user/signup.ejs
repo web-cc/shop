@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+
+<head>
+	<!-- Mobile Specific Meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Favicon-->
+	<link rel="shortcut icon" href="/img/fav.png">
+	<!-- Author Meta -->
+	<meta name="author" content="CodePixar">
+	<!-- Meta Description -->
+	<meta name="description" content="">
+	<!-- Meta Keyword -->
+	<meta name="keywords" content="">
+	<!-- meta character set -->
+	<meta charset="UTF-8">
+	<!-- Site Title -->
+	<title>Sản phẩm</title>
+	<!--
+			CSS
+			============================================= -->
+	<link rel="stylesheet" href="/css/linearicons.css">
+	<link rel="stylesheet" href="/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/css/themify-icons.css">
+	<link rel="stylesheet" href="/css/bootstrap.css">
+	<link rel="stylesheet" href="/css/owl.carousel.css">
+	<link rel="stylesheet" href="/css/nice-select.css">
+	<link rel="stylesheet" href="/css/nouislider.min.css">
+	<link rel="stylesheet" href="/css/ion.rangeSlider.css" />
+	<link rel="stylesheet" href="/css/ion.rangeSlider.skinFlat.css" />
+	<link rel="stylesheet" href="/css/main.css">
+</head>
+
+<body>
+	<!--header start here-->
+	<% include ./../default/header %>
+
+	<div class="content-w3ls">
+		<div class="content-agile2">
+			<form action="/tai-khoan/dang-ki" method="POST">
+				<div class="form-control w3layouts">
+					<input type="text" id="firstname" name="name" placeholder="Họ và tên" title="Nhập vào tên của bạn"
+						required="">
+				</div>
+
+				<div class="form-control w3layouts" style="align-items: center">
+					<input type="text" id="account" name="id" placeholder="Tên đăng nhập"
+						title="Nhập vào tên đăng nhập" required="" onblur="checkAccount()" >
+					<span class="text-danger" id="error1" style="display:none;">Tên đăng nhập này đã tồn tại!</span>
+					<span class="text-danger" id="error2" style="display:none;">Tên đăng nhập không được trống!</span>
+				</div>
+				<div class="form-control w3layouts" style="align-items: center">
+					<input type="number" id="phone" name="phoneNumber" placeholder="Số điện thoại"
+						title="Nhập vào số điện thoại" required="" onblur="checkPhone()" >
+					<span class="text-danger" id="phone1" style="display:none;">Số điện thoại này đã được sử dụng!</span>
+					<span class="text-danger" id="phone2" style="display:none;">Số điện thoại không được trống!</span>
+					<span class="text-danger" id="errPhoneNumber" style="display:none;">Số điện thoại không đúng định dạng!</span>
+				</div>
+				<div class="form-control w3layouts">
+					<input type="text" id="address" name="address" placeholder="Địa chỉ" title="Nhập vào địa chỉ"
+						required="">
+				</div>
+				<div class="form-control w3layouts">
+					<input type="text" id="email" name="email" placeholder="Email" title="Nhập vào địa chỉ email"
+						required="">
+				</div>
+				<div class="form-control agileinfo">
+					<input type="password" class="lock" name="password" placeholder="Mật khẩu" id="password1"
+						title="Nhập mật khẩu" required="">
+				</div>
+
+				<div class="form-control agileinfo">
+					<input type="password" class="lock" name="confirm-password" placeholder="Nhập lại mật khẩu"
+						id="password2" title="Nhập lại mật khẩu" required="">
+					<span class="text-danger" id="errpassword" style="display:none;">Hai mật khẩu không trùng nhau!</span>
+				</div>
+
+				<input type="submit" class="register" value="Đăng kí">
+			</form>
+			<script type="text/javascript">
+				window.onload = function () {
+					document.getElementById("password1").onchange = validatePassword;
+					document.getElementById("password2").onchange = validatePassword;
+				}
+				function validatePassword() {
+					var pass2 = document.getElementById("password2").value;
+					var pass1 = document.getElementById("password1").value;
+					if (pass1 != pass2)
+						document.getElementById("password2").setCustomValidity("Mật khẩu không khớp");
+					else
+						document.getElementById("password2").setCustomValidity('');
+					//empty string means no validation error
+				}
+			</script>
+			<p class="wthree w3l">Đăng kí nhanh bằng mạng xã hội</p>
+			<ul class="social-agileinfo wthree2">
+				<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+				<li><a href="#"><i class="fa fa-youtube"></i></a></li>
+				<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+				<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+			</ul>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<% include ./../default/footer %>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script>
+
+		$("#password2").mouseout(function(){
+			let a = $("#password1").val();
+			let b = $("#password2").val();
+			if(a != b){
+				$('#errpassword').attr("style", "");
+			}
+			else{
+				$('#errpassword').attr("style", "display:none;");
+			}
+		});
+
+		function checkAccount() {
+			var accountCurrent = document.getElementById("account").value;
+			$.ajax({
+				url: "/tai-khoan/check-account",
+				type: "POST",
+				contentType: 'application/x-www-form-urlencoded',
+				data: { data: accountCurrent },
+				success: function (response) {
+					if (response == "1") {
+						$('#error1').attr("style", "display:none;");
+						$('#error2').attr("style", "display:none;");
+						$('#account').attr("style", "");
+					}
+					else if (response == "0") {
+						$('#account').attr("style", "color: red");
+						$('#error1').attr("style", "");
+						$('#error2').attr("style", "display:none;");
+					}
+					else {
+						$('#error1').attr("style", "display:none;");
+						$('#error2').attr("style", "");
+					}
+
+				},
+				error: function () {
+					alert("Lỗi");
+				}
+			});
+		}
+		function checkPhone() {
+			var phoneCurrent = $("#phoneNumber").val();
+			var flag=false;
+            var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+            var mobile = $('#phoneNumber').val();
+            if (vnf_regex.test(mobile) == false) {
+				$('#phoneNumber').attr("style", "color: red");
+                $("#errPhoneNumber").attr("style", "");
+				flag=false;
+            } else {
+				$('#phoneNumber').attr("style", "");
+                $("#errPhoneNumber").attr("style", "display:none;");
+				flag=true;
+            }
+			if(flag=true){
+			$.ajax({
+				url: "/tai-khoan/check-phone",
+				type: "POST",
+				contentType: 'application/x-www-form-urlencoded',
+				data: { data: phoneCurrent },
+				success: function (response) {
+					if (response == "1") {
+						$('#phoneNumber').attr("style", "");
+						$('#phone1').attr("style", "display:none;");
+						$('#phone2').attr("style", "display:none;");
+					}
+					else if (response == "0") {
+						$('#phoneNumber').attr("style", "color: red");
+						$('#phone1').attr("style", "");
+						$('#phone2').attr("style", "display:none;");
+					}
+					else {
+						$('#phone1').attr("style", "display:none;");
+						$('#phone2').attr("style", "");
+					}
+
+				},
+				error: function () {
+					alert("Lỗi");
+				}
+			});
+			}
+		}
+	</script>
+</body>
+
+</html>
