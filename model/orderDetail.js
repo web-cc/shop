@@ -1,12 +1,9 @@
-var orderDetail = function (id, id_customer, id_product, id_order, status, note) {
+var orderDetail = function (id, employee_id, order_id, product_id, price, status) {
     this.id = id;
+    this.employee_id = employee_id;
+    this.order_id = order_id;
+    this.product_id=product_id;
+    this.price = price;
     this.status = status;
-    this.id_product = id_product;
-    this.note=note;
-    this.id_order = id_order;
-    this.id_customer = id_customer;
 }
-
-
-
 module.exports = orderDetail;

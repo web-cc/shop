@@ -1,7 +1,7 @@
 var express = require('express');
 var con = require('../config/key');
 const customer = require('./../model/customer');
-var passport = require('../config/passport'); // pass passport for configuration
+var passport = require('passport'); 
 var router = express.Router();
 
 /* GET home page. */
@@ -22,7 +22,7 @@ router.signup = (req,res,next)=>{
   
 
   passport.authenticate('local-signup',{
-    successRedirect: '/tai-khoan',
+    successRedirect: '/login',
     failureRedirect: '/dang-ki',
     failureFlash: true
   },function (err,user,info){
@@ -44,48 +44,48 @@ router.signup = (req,res,next)=>{
           return res.redirect('/dang-ki');
           
         } else {
-            return res.redirect('/tai-khoan');
+            return res.redirect('/login');
         }
     });
   })(req, res, next);
   //   let sql='INSERT INTO customers(name, phoneNumber, place,account,password,address) VALUES ("'+name+'","'+phoneNumber+'","'+address+'","'+account+'","'+password+'",1)';
   //   con.query(sql);
-  // res.redirect('/tai-khoan');
+  // res.redirect('/login');
   
 }
 
 
-//login connect with link /tai-khoan/dang-nhap
+//login connect with link /login/dang-nhap
 router.signin = (req,res,next)=>{
-  
-  let account = req.body.account;
+  console.log("phongle123");
+  let account = req.body.email;
   let password = req.body.password;
   console.log(account);
   console.log(password);
 
   passport.authenticate('local-login',{
     successRedirect: '/',
-    failureRedirect: '/tai-khoan',
+    failureRedirect: '/login',
     failureFlash: true
   },function(err, user, info) {
     
     
     if(err) {
       req.flash('loginMessage', err.message)
-      return res.redirect('/tai-khoan');
+      return res.redirect('/login');
     }
 
     if(!user) {
       req.flash('loginMessage', 'Tài khoản hoặc mật khẩu không chính xác')
     
-      return res.redirect('/tai-khoan');
+      return res.redirect('/login');
     }
 
     return req.logIn(user, function(err) {
         if(err) {
           req.flash('loginMessage', 'Tài khoản hoặc mật khẩu không chính xác')
     
-          return res.redirect('/tai-khoan');
+          return res.redirect('/login');
           
         } else {
             return res.redirect('/');

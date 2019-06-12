@@ -5,6 +5,6 @@ var product = function(id, name,price,producer, description, quantity, category_
     this.producer= producer
     this.description = description;
     this.quantity= quantity
-    this.category_id
+    this.category_id = category_id;
   }
 module.exports = product;

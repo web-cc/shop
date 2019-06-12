@@ -37,37 +37,36 @@ module.exports = function(passport) {
         'local-signup',
         new LocalStrategy({
             // by default, local strategy uses username and password, we will override with email
-            usernameField : 'account',
+            usernameField : 'email',
             passwordField : 'password',
             
             passReqToCallback : true // allows us to pass back the entire request to the callback
         },
-        function(req, username, password, done) {
-            let phoneNumber = req.body.phoneNumber;
+        function(req, email, password, done) {
+            let phone = req.body.phone;
             let address = req.body.address;
             let name = req.body.name;
-            console.log(username+password+phoneNumber+address+name);
             // find a user whose email is the same as the forms email
             // we are checking to see if the user trying to login already exists
-            con.query("SELECT * FROM customers WHERE account = ?",[username], function(err, rows) {
+            con.query("SELECT * FROM customers WHERE email = ?",[email], function(err, rows) {
                 if (err){
                     console.log(err.message);
                     return done(err);
                 }
                 if (rows.length) {
                     console.log("is already");
-                    return done(null, false, req.flash('signupMessage', 'That username is already taken.'));
+                    return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
                 } else {
-                    // if there is no user with that username
+                    // if there is no user with that email
                     // create the user
                     var newUserMysql = {
-                        username: username,
+                        email: email,
                         password: bcrypt.hashSync(password, null, null)  // use the generateHash function in our user model
                     };
                     console.log(newUserMysql);
-                    // var insertQuery = "INSERT INTO customers ( account, password ) values (?,?)";
-                    var insertQuery = "INSERT INTO customers(name, phoneNumber, place,account,password,status) values (?,?,?,?,?,?)"
-                    con.query(insertQuery,[name,phoneNumber,address,newUserMysql.username, newUserMysql.password,1],function(err, rows) {
+                    // var insertQuery = "INSERT INTO customers ( email, password ) values (?,?)";
+                    var insertQuery = "INSERT INTO customers(name, phone, address,email,password) values (?,?,?,?,?)"
+                    con.query(insertQuery,[name,phone,address,newUserMysql.email, newUserMysql.password,1],function(err, rows) {
                         
                         
                         return done(null, newUserMysql);
@@ -86,16 +85,16 @@ module.exports = function(passport) {
     passport.use(
         'local-login',
         new LocalStrategy({
-            // by default, local strategy uses username and password, we will override with email
-            usernameField : 'account',
+            // by default, local strategy uses email and password, we will override with email
+            usernameField : 'email',
             passwordField : 'password',
             passReqToCallback : true // allows us to pass back the entire request to the callback
         
         },
-        function(req, username, password, done) { // callback with email and password from our form
-            console.log(username+password);
+        function(req, email, password, done) { // callback with email and password from our form
+            console.log(email+password);
            
-            con.query("SELECT * FROM customers WHERE account = ? ",[username], function(err, rows){
+            con.query("SELECT * FROM customers WHERE email = ? ",[email], function(err, rows){
                 
                 if (err){
                 console.log("error");

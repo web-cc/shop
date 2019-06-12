@@ -17,12 +17,15 @@ router.get('/',index.home);
 router.get('/cart',cart.home);
 router.get('/category',category.list);
 router.get('/checkout',checkout.home);
-router.get('/login',login.home);
 router.get('/product',product.getIndex);
 router.get('/user',usersController.user);
-router.get('/signup',signupController.getIndex);
+router.get('/login',login.home); //dang nhap
+router.post('/user/login',usersController.signin); // dang nhap
+router.get('/signup',signupController.getIndex); //dang ky
+router.post('/user/signup',usersController.signup); //dang ky
 router.post('/tai-khoan/check-account',isLoggedIn,usersController.check);
 router.post('/tai-khoan/check-phone',isLoggedIn,usersController.checkPhone);
+
 router.get('/thong-tin-tai-khoan',userDetailController.getDetail);
 router.get('/san-pham/tim-kiem',productController.getSearch);
 function isLoggedIn(req, res, next) {

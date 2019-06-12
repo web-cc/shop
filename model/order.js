@@ -1,13 +1,11 @@
 var con = require('./../config/key');
-var order = function (id, address, customerName, orderName, sumMoney, status, create,id_customer) {
+var order = function (id, customer_id, amount, status, created_at , address) {
     this.id = id;
-    this.address = address;
-    this.customerName = customerName;
-    this.orderName = orderName;
-    this.sumMoney = sumMoney;
+    this.customer_id = customer_id;
+    this.amount = amount;
     this.status = status;
-    this.create = create;
-    this.id_customer = id_customer;
+    this.created_at = created_at;
+    this.address = address;
 }
 
 

@@ -1,7 +1,9 @@
-var customer = function(id, name, phoneNumber, address,email,password){
+var customer = function(id, name, phone, address,email,password){
     this.id = id;
     this.name = name;
-    this.phoneNumber = phoneNumber;
+    this.phone = phone;
+    this.address = address;
+
     this.email= email;
     this.password=password;
   }

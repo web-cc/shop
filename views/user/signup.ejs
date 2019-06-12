@@ -5,7 +5,7 @@
 	<!-- Mobile Specific Meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- Favicon-->
-	<link rel="shortcut icon" href="/img/fav.png">
+	<link rel="shortcut icon" href="img/fav.png">
 	<!-- Author Meta -->
 	<meta name="author" content="CodePixar">
 	<!-- Meta Description -->
@@ -15,181 +15,108 @@
 	<!-- meta character set -->
 	<meta charset="UTF-8">
 	<!-- Site Title -->
-	<title>Sản phẩm</title>
+	<title>Đăng nhập</title>
+
 	<!--
-			CSS
-			============================================= -->
-	<link rel="stylesheet" href="/css/linearicons.css">
-	<link rel="stylesheet" href="/css/font-awesome.min.css">
-	<link rel="stylesheet" href="/css/themify-icons.css">
-	<link rel="stylesheet" href="/css/bootstrap.css">
-	<link rel="stylesheet" href="/css/owl.carousel.css">
-	<link rel="stylesheet" href="/css/nice-select.css">
-	<link rel="stylesheet" href="/css/nouislider.min.css">
-	<link rel="stylesheet" href="/css/ion.rangeSlider.css" />
-	<link rel="stylesheet" href="/css/ion.rangeSlider.skinFlat.css" />
-	<link rel="stylesheet" href="/css/main.css">
+		CSS
+		============================================= -->
+	<link rel="stylesheet" href="css/linearicons.css">
+	<link rel="stylesheet" href="css/owl.carousel.css">
+	<link rel="stylesheet" href="css/themify-icons.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/nice-select.css">
+	<link rel="stylesheet" href="css/nouislider.min.css">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
-	<!--header start here-->
+
+	<!-- Start Header Area -->
 	<% include ./../default/header %>
+	<!-- End Header Area -->
 
-	<div class="content-w3ls">
-		<div class="content-agile2">
-			<form action="/tai-khoan/dang-ki" method="POST">
-				<div class="form-control w3layouts">
-					<input type="text" id="firstname" name="name" placeholder="Họ và tên" title="Nhập vào tên của bạn"
-						required="">
+	<!-- Start Banner Area -->
+	<section class="banner-area organic-breadcrumb">
+		<div class="container">
+			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+				<div class="col-first">
+					<h1>Login/Register</h1>
+					<nav class="d-flex align-items-center">
+						<a href="index.html">Trang chủ<span class="lnr lnr-arrow-right"></span></a>
+						<a href="category.html">Đăng nhập/Đăng ký</a>
+					</nav>
 				</div>
-
-				<div class="form-control w3layouts" style="align-items: center">
-					<input type="text" id="account" name="id" placeholder="Tên đăng nhập"
-						title="Nhập vào tên đăng nhập" required="" onblur="checkAccount()" >
-					<span class="text-danger" id="error1" style="display:none;">Tên đăng nhập này đã tồn tại!</span>
-					<span class="text-danger" id="error2" style="display:none;">Tên đăng nhập không được trống!</span>
-				</div>
-				<div class="form-control w3layouts" style="align-items: center">
-					<input type="number" id="phone" name="phoneNumber" placeholder="Số điện thoại"
-						title="Nhập vào số điện thoại" required="" onblur="checkPhone()" >
-					<span class="text-danger" id="phone1" style="display:none;">Số điện thoại này đã được sử dụng!</span>
-					<span class="text-danger" id="phone2" style="display:none;">Số điện thoại không được trống!</span>
-					<span class="text-danger" id="errPhoneNumber" style="display:none;">Số điện thoại không đúng định dạng!</span>
-				</div>
-				<div class="form-control w3layouts">
-					<input type="text" id="address" name="address" placeholder="Địa chỉ" title="Nhập vào địa chỉ"
-						required="">
-				</div>
-				<div class="form-control w3layouts">
-					<input type="text" id="email" name="email" placeholder="Email" title="Nhập vào địa chỉ email"
-						required="">
-				</div>
-				<div class="form-control agileinfo">
-					<input type="password" class="lock" name="password" placeholder="Mật khẩu" id="password1"
-						title="Nhập mật khẩu" required="">
-				</div>
-
-				<div class="form-control agileinfo">
-					<input type="password" class="lock" name="confirm-password" placeholder="Nhập lại mật khẩu"
-						id="password2" title="Nhập lại mật khẩu" required="">
-					<span class="text-danger" id="errpassword" style="display:none;">Hai mật khẩu không trùng nhau!</span>
-				</div>
-
-				<input type="submit" class="register" value="Đăng kí">
-			</form>
-			<script type="text/javascript">
-				window.onload = function () {
-					document.getElementById("password1").onchange = validatePassword;
-					document.getElementById("password2").onchange = validatePassword;
-				}
-				function validatePassword() {
-					var pass2 = document.getElementById("password2").value;
-					var pass1 = document.getElementById("password1").value;
-					if (pass1 != pass2)
-						document.getElementById("password2").setCustomValidity("Mật khẩu không khớp");
-					else
-						document.getElementById("password2").setCustomValidity('');
-					//empty string means no validation error
-				}
-			</script>
-			<p class="wthree w3l">Đăng kí nhanh bằng mạng xã hội</p>
-			<ul class="social-agileinfo wthree2">
-				<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-				<li><a href="#"><i class="fa fa-youtube"></i></a></li>
-				<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-				<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-			</ul>
+			</div>
 		</div>
-		<div class="clear"></div>
-	</div>
+	</section>
+	<!-- End Banner Area -->
+
+	<!--================Login Box Area =================-->
+	<section class="login_box_area section_gap">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-6">
+					<div class="login_box_img">
+						<img class="img-fluid" src="img/login.jpg" alt="">
+						<div class="hover">
+							<h4>Trang của bạn</h4>
+							<p>Làm theo hướng dẫn</p>
+							<a class="primary-btn" href="signup">Tạo tài khoản</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="login_form_inner">
+						<h3>Đăng nhập</h3>
+						<form class="row login_form" action="user/signup" method="POST" id="contactForm" novalidate="novalidate">
+							<div class="col-md-12 form-group">
+								<input type="text" class="form-control" id="name" name="name" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'name'">
+							</div>
+							<div class="col-md-12 form-group">
+								<input type="text" class="form-control" id="email" name="email" placeholder="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'email'">
+							</div>
+							<div class="col-md-12 form-group">
+								<input type="password" class="form-control" id="password" name="password" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
+							</div>
+							<div class="col-md-12 form-group">
+								<input type="text" class="form-control" id="phone" name="phone" placeholder="phone" onfocus="this.placeholder = ''" onblur="this.placeholder = 'phone'">
+							</div>
+							<div class="col-md-12 form-group">
+								<input type="text" class="form-control" id="address" name="address" placeholder="address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'address'">
+							</div>
+						
+							<div class="col-md-12 form-group">
+								<button type="submit" value="submit" class="primary-btn">Sign up</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================End Login Box Area =================-->
+
+	<!-- start footer Area -->
 	<% include ./../default/footer %>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script>
 
-		$("#password2").mouseout(function(){
-			let a = $("#password1").val();
-			let b = $("#password2").val();
-			if(a != b){
-				$('#errpassword').attr("style", "");
-			}
-			else{
-				$('#errpassword').attr("style", "display:none;");
-			}
-		});
+	<!-- End footer Area -->
 
-		function checkAccount() {
-			var accountCurrent = document.getElementById("account").value;
-			$.ajax({
-				url: "/tai-khoan/check-account",
-				type: "POST",
-				contentType: 'application/x-www-form-urlencoded',
-				data: { data: accountCurrent },
-				success: function (response) {
-					if (response == "1") {
-						$('#error1').attr("style", "display:none;");
-						$('#error2').attr("style", "display:none;");
-						$('#account').attr("style", "");
-					}
-					else if (response == "0") {
-						$('#account').attr("style", "color: red");
-						$('#error1').attr("style", "");
-						$('#error2').attr("style", "display:none;");
-					}
-					else {
-						$('#error1').attr("style", "display:none;");
-						$('#error2').attr("style", "");
-					}
 
-				},
-				error: function () {
-					alert("Lỗi");
-				}
-			});
-		}
-		function checkPhone() {
-			var phoneCurrent = $("#phoneNumber").val();
-			var flag=false;
-            var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
-            var mobile = $('#phoneNumber').val();
-            if (vnf_regex.test(mobile) == false) {
-				$('#phoneNumber').attr("style", "color: red");
-                $("#errPhoneNumber").attr("style", "");
-				flag=false;
-            } else {
-				$('#phoneNumber').attr("style", "");
-                $("#errPhoneNumber").attr("style", "display:none;");
-				flag=true;
-            }
-			if(flag=true){
-			$.ajax({
-				url: "/tai-khoan/check-phone",
-				type: "POST",
-				contentType: 'application/x-www-form-urlencoded',
-				data: { data: phoneCurrent },
-				success: function (response) {
-					if (response == "1") {
-						$('#phoneNumber').attr("style", "");
-						$('#phone1').attr("style", "display:none;");
-						$('#phone2').attr("style", "display:none;");
-					}
-					else if (response == "0") {
-						$('#phoneNumber').attr("style", "color: red");
-						$('#phone1').attr("style", "");
-						$('#phone2').attr("style", "display:none;");
-					}
-					else {
-						$('#phone1').attr("style", "display:none;");
-						$('#phone2').attr("style", "");
-					}
-
-				},
-				error: function () {
-					alert("Lỗi");
-				}
-			});
-			}
-		}
-	</script>
+	<script src="js/vendor/jquery-2.2.4.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+	 crossorigin="anonymous"></script>
+	<script src="js/vendor/bootstrap.min.js"></script>
+	<script src="js/jquery.ajaxchimp.min.js"></script>
+	<script src="js/jquery.nice-select.min.js"></script>
+	<script src="js/jquery.sticky.js"></script>
+	<script src="js/nouislider.min.js"></script>
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<!--gmaps Js-->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+	<script src="js/gmaps.min.js"></script>
+	<script src="js/main.js"></script>
 </body>
 
 </html>
