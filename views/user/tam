@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+
+<head>
+	<!-- Mobile Specific Meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Favicon-->
+	<link rel="shortcut icon" href="/img/fav.png">
+	<!-- Author Meta -->
+	<meta name="author" content="CodePixar">
+	<!-- Meta Description -->
+	<meta name="description" content="">
+	<!-- Meta Keyword -->
+	<meta name="keywords" content="">
+	<!-- meta character set -->
+	<meta charset="UTF-8">
+	<!-- Site Title -->
+	<title>Sản phẩm</title>
+	<!--
+			CSS
+			============================================= -->
+	<link rel="stylesheet" href="/css/linearicons.css">
+	<link rel="stylesheet" href="/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/css/themify-icons.css">
+	<link rel="stylesheet" href="/css/bootstrap.css">
+	<link rel="stylesheet" href="/css/owl.carousel.css">
+	<link rel="stylesheet" href="/css/nice-select.css">
+	<link rel="stylesheet" href="/css/nouislider.min.css">
+	<link rel="stylesheet" href="/css/ion.rangeSlider.css" />
+	<link rel="stylesheet" href="/css/ion.rangeSlider.skinFlat.css" />
+	<link rel="stylesheet" href="/css/main.css">
+</head>
+
+<body>
+	<!--header start here-->
+	<% include ./../default/header %>
+
+	<div class="content-w3ls">
+		<div class="content-agile2">
+			<form action="user/signup" method="POST">
+				<div class="form-control w3layouts">
+					<input type="text" id="firstname" name="name" placeholder="Họ và tên" title="Nhập vào tên của bạn"
+						required="">
+				</div>
+
+				<div class="form-control w3layouts">
+					<input type="text" id="email" name="email" placeholder="Email" title="Nhập vào địa chỉ email"
+						required="">
+				</div>
+				<div class="form-control w3layouts" style="align-items: center">
+					<input type="number" id="phone" name="phone" placeholder="Số điện thoại"
+						title="Nhập vào số điện thoại" required="" onblur="checkPhone()" >
+					<span class="text-danger" id="phone1" style="display:none;">Số điện thoại này đã được sử dụng!</span>
+					<span class="text-danger" id="phone2" style="display:none;">Số điện thoại không được trống!</span>
+					<span class="text-danger" id="errPhoneNumber" style="display:none;">Số điện thoại không đúng định dạng!</span>
+				</div>
+				<div class="form-control w3layouts">
+					<input type="text" id="address" name="address" placeholder="Địa chỉ" title="Nhập vào địa chỉ"
+						required="">
+				</div>
+				
+				<div class="form-control agileinfo">
+					<input type="password" class="lock" name="password" placeholder="Mật khẩu" id="password1"
+						title="Nhập mật khẩu" required="">
+				</div>
+				<input type="submit" class="register" value="Đăng kí">
+			</form>
+			
+			<p class="wthree w3l">Đăng kí nhanh bằng mạng xã hội</p>
+			<ul class="social-agileinfo wthree2">
+				<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+				<li><a href="#"><i class="fa fa-youtube"></i></a></li>
+				<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+				<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+			</ul>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<% include ./../default/footer %>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script>
+
+	</script>
+</body>
+
+</html>

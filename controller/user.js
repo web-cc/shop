@@ -6,15 +6,10 @@ var router = express.Router();
 
 /* GET home page. */
 router.user = (req, res, next) => {
-//   if(req.isAuthenticated()) {
-//     res.redirect('/');
-// } else {
-//     res.render('user/users', { message: req.flash('loginMessage') });
-// }
+ 
 
   res.render('user/users',{ message: req.flash('loginMessage') ,user: req.user})
 };
-var abc = [];
 
 //signup connect with link: 
 router.signup = (req,res,next)=>{
@@ -23,25 +18,25 @@ router.signup = (req,res,next)=>{
 
   passport.authenticate('local-signup',{
     successRedirect: '/login',
-    failureRedirect: '/dang-ki',
+    failureRedirect: '/signup',
     failureFlash: true
   },function (err,user,info){
     if(err) {
       req.flash('loginMessage', err.message)
-      return res.redirect('/dang-ki');
+      return res.redirect('/signup');
     }
 
     if(!user) {
       req.flash('loginMessage', 'Tài khoản hoặc mật khẩu không chính xác')
     
-      return res.redirect('/dang-ki');
+      return res.redirect('/signup');
     }
 
     return req.logIn(user, function(err) {
         if(err) {
           req.flash('loginMessage', 'Tài khoản hoặc mật khẩu không chính xác')
     
-          return res.redirect('/dang-ki');
+          return res.redirect('/signup');
           
         } else {
             return res.redirect('/login');
@@ -57,7 +52,6 @@ router.signup = (req,res,next)=>{
 
 //login connect with link /login/dang-nhap
 router.signin = (req,res,next)=>{
-  console.log("phongle123");
   let account = req.body.email;
   let password = req.body.password;
   console.log(account);
@@ -95,9 +89,7 @@ router.signin = (req,res,next)=>{
   
  
 }
-function functionName() {
-  
-} 
+
 router.check = (req, res) => {
   let account = req.body.data;
   if (account == undefined || account == "") {
