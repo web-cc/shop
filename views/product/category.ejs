@@ -93,7 +93,7 @@
 										</div>
 										<div class="prd-bottom">
 	
-											<a href="" class="social-info">
+											<a  href="" onclick="order(<%= products[i].id %>)" class="social-info">
 												<span class="ti-bag"></span>
 												<p class="hover-text">Thêm vào túi</p>
 											</a>
@@ -412,6 +412,20 @@
 <!--===============================================================================================-->
 	<script src="/vendor/sweetalert/sweetalert.min.js"></script>
 	<script>
+		function order(id) {
+			$.ajax({
+				url: "/product",
+				type: "POST",
+				contentType: 'application/x-www-form-urlencoded',
+				data: { id_product: id},
+				success: function (response) {
+				},
+				error: function () {
+					alert("Lỗi");
+				}
+			});
+		}
+
 		$('.js-addwish-b2, .js-addwish-detail').on('click', function(e){
 			e.preventDefault();
 		});

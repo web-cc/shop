@@ -30,4 +30,34 @@ router.list = (req, res, next) => {
   });
   
 };
+router.order = (req,res,next) =>{
+  console.log("phong"); 
+  var id_product = req.body.id_product;
+  console.log(id_product);
+  let productSessionList = [];
+  var productSession={
+    id: null,
+  };
+  if(req.session.productSession != undefined)
+  {
+    productSessionList = req.session.productSession;
+    for (var i = 0 ; i<productSessionList.length;i++)
+    {
+      if(id_product == productSessionList[i].id)
+      {
+        req.session.productSession = productSessionList;
+        res.send("added");
+        return;
+      }
+    }
+    
+  }
+  productSession.id = id_product;
+  productSessionList.push(productSession);
+  req.session.productSession = productSessionList;
+  console.log(req.session);
+  res.send("added");
+
+}
+
 module.exports = router;

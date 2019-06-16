@@ -14,7 +14,6 @@ var productController = require('../controller/product');
 
 /* GET home page. */
 router.get('/',index.home);
-router.get('/cart',cart.home);
 router.get('/checkout',checkout.home);
 router.get('/user',usersController.user);
 router.post('/tai-khoan/check-account',isLoggedIn,usersController.check);
@@ -24,6 +23,12 @@ router.post('/tai-khoan/check-phone',isLoggedIn,usersController.checkPhone);
 router.get('/category',category.list);
 //chi tiet san pham
 router.get('/product/:id',product.list);
+router.post('/product',product.order);
+
+
+// gio hang
+router.get('/cart',cart.list);
+router.get('/logout',usersController.logout);//dang xuat
 
 router.get('/login',login.home); //dang nhap
 router.post('/user/login',usersController.signin); // dang nhap

@@ -11,6 +11,9 @@ router.user = (req, res, next) => {
   res.render('user/users',{ message: req.flash('loginMessage') ,user: req.user})
 };
 
+router.logout = (req, res, next) => {
+  res.render('login/login',{  user: req.user})
+};
 //signup connect with link: 
 router.signup = (req,res,next)=>{
   
@@ -144,6 +147,6 @@ router.checkPhone = (req, res) => {
 router.logout=(req,res,next)=>
 {
   req.logout();
-  res.redirect('/');
+  res.redirect('/login');
 }
 module.exports = router;

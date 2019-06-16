@@ -43,8 +43,8 @@
                 <div class="col-first">
                     <h1>Giỏ hàng</h1>
                     <nav class="d-flex align-items-center">
-                        <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="category.html">Hàng</a>
+                        <a href="/">Trang chủ<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="/cart">Giỏ hàng</a>
                     </nav>
                 </div>
             </div>
@@ -67,6 +67,8 @@
                             </tr>
                         </thead>
                         <tbody>
+                                <% for(var i=0; i < productAll.length ; i++){ %>
+   
                             <tr>
                                 <td>
                                     <div class="media">
@@ -74,80 +76,27 @@
                                             <img src="img/cart.jpg" alt="">
                                         </div>
                                         <div class="media-body">
-                                            <p>Cửa hàng tối giản để sử dụng đa mục đích</p>
+                                            <p><%= productAll[i].name %></p>
                                         </div>
                                     </div>
                                 </td>
-                                <td>
-                                    <h5>$360.00</h5>
+                                <td class="price">
+                                    <h5 ><%= productAll[i].price %> đ</h5>
                                 </td>
-                                <td>
+                                <td class="quantity">
                                     <div class="product_count">
-                                        <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:"
-                                            class="input-text qty">
-                                        <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                            class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
+                                        <input type="number" name="qty" id="sst" max="12" min="1" 
+                                            class="input-text qty quantity-input" value="1">
+                                        
                                         
                                     </div>
                                 </td>
-                                <td>
-                                    <h5>$720.00</h5>
+                                <td class="sum">
+                                    <h5><%= productAll[i].price %></h5><span>VNĐ</span>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <div class="media">
-                                        <div class="d-flex">
-                                            <img src="img/cart.jpg" alt="">
-                                        </div>
-                                        <div class="media-body">
-                                            <p>Cửa hàng tối giản để sử dụng đa mục đích</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h5>$360.00</h5>
-                                </td>
-                                <td>
-                                    <div class="product_count">
-                                        <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:"
-                                            class="input-text qty">
-                                        <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                            class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-                                       
-                                    </div>
-                                </td>
-                                <td>
-                                    <h5>$720.00</h5>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="media">
-                                        <div class="d-flex">
-                                            <img src="img/cart.jpg" alt="">
-                                        </div>
-                                        <div class="media-body">
-                                            <p>Cửa hàng tối giản để sử dụng đa mục đích</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h5>$360.00</h5>
-                                </td>
-                                <td>
-                                    <div class="product_count">
-                                        <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:"
-                                            class="input-text qty">
-                                        <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                            class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-                                        
-                                    </div>
-                                </td>
-                                <td>
-                                    <h5>$720.00</h5>
-                                </td>
-                            </tr>
+                            <%}%>
+
                             <tr class="bottom_button">
                                 <td>
                                     <a class="gray_btn" href="#">Cập nhật giỏ hàng</a>
@@ -177,7 +126,7 @@
                                     <h5> Tổng   </h5>
                                 </td>
                                 <td>
-                                    <h5>$2160.00</h5>
+                                    <h5 id="total-amount">0</h5>
                                 </td>
                             </tr>
                             <tr class="shipping_area">
@@ -257,7 +206,24 @@
 	<!--gmaps Js-->
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
 	<script src="js/gmaps.min.js"></script>
-	<script src="js/main.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        $(".quantity-input").change(function(){
+            var price = parseInt($(this).parent().parent().parent().find(".price").text());
+			var quantity = $(this).val();
+            var sum =+ parseInt(price) * (parseInt(quantity) ) + "đ";
+            $(this).parent().parent().parent().find(".sum").find("h5").html("");
+            $(this).parent().parent().parent().find(".sum").find("h5").append(sum);
+
+            var total_amount = 0;
+			$('.sum').each(function () {
+                total_amount = total_amount + parseInt($(this).text());
+            })
+            $("#total-amount").html("");
+            $("#total-amount").append(total_amount);
+
+  });
+    </script>
 </body>
 
 </html>
