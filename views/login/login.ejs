@@ -70,9 +70,12 @@
 					<div class="login_form_inner">
 						
 						<h3>Đăng nhập</h3>
+						<% if (message.length > 0) { %>
+							<div class="alert alert-danger"><%= message %></div>
+						<% } %>
 						<form class="row login_form" action="user/login" method="POST" id="contactForm" novalidate="novalidate">
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="email" name="email" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'">
+								<input type="text" class="form-control" id="email" name="email" placeholder="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'">
 							</div>
 							<div class="col-md-12 form-group">
 								<input type="password" class="form-control" id="password" name="password" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
