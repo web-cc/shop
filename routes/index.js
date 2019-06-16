@@ -15,26 +15,34 @@ var productController = require('../controller/product');
 /* GET home page. */
 router.get('/',index.home);
 router.get('/cart',cart.home);
-router.get('/category',category.list);
 router.get('/checkout',checkout.home);
-router.get('/product',product.getIndex);
 router.get('/user',usersController.user);
+router.post('/tai-khoan/check-account',isLoggedIn,usersController.check);
+router.post('/tai-khoan/check-phone',isLoggedIn,usersController.checkPhone);
+
+//danh mục sản phẩm
+router.get('/category',category.list);
+//chi tiet san pham
+router.get('/product/:id',product.list);
+
 router.get('/login',login.home); //dang nhap
 router.post('/user/login',usersController.signin); // dang nhap
 router.get('/signup',signupController.getIndex); //dang ky
 router.post('/user/signup',usersController.signup); //dang ky
-router.post('/tai-khoan/check-account',isLoggedIn,usersController.check);
-router.post('/tai-khoan/check-phone',isLoggedIn,usersController.checkPhone);
 
-router.get('/thong-tin-tai-khoan',userDetailController.getDetail);
-router.get('/san-pham/tim-kiem',productController.getSearch);
+
+
+
+
+
+
+
+
 function isLoggedIn(req, res, next) {
 
-	// if user is authenticated in the session, carry on doi xi lay mic
 	if (req.isAuthenticated())
 		return next();
 
-	// if they aren't redirect them to the home page
-    res.redirect('/tai-khoan');
+    res.redirect('/user');
 }
 module.exports = router;

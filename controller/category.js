@@ -3,23 +3,82 @@ var router = express.Router();
 var con = require('./../config/key');
 var router = express.Router();
 const category = require('./../model/category');
+const product = require('./../model/product');
 
-
-var categoriesAll = [];
-
-con.query('select * from categories', function (err, rows, fields) {
-  if (err) throw err
-
-  rows.forEach(element => {
-    var x = new category(element.id, element.name, element.description);
-    categoriesAll.push(x);
-  })
-});
-/* GET home page. */
 router.list = (req, res, next) => {
-  let categories = [];
-  categories = categoriesAll;
-  res.render('category/category',{categories : categories,user: req.user});
+  productsAll = [];
+  categoriesAll = [];
+  var from = req.query.from;
+  var to = req.query.to;
+  var category_id_filter = req.query.categoryId;
+  console.log(category_id_filter);
+  console.log(from);
+  console.log(to);
+ 
+  con.query('select * from categories ', function (err, rows, fields) {
+    if (err) throw err
+  
+    rows.forEach(element => {
+      var x = new category(element.id, element.name, element.description);
+      categoriesAll.push(x);
+    })
+  });
+  if (from == undefined && to == undefined && category_id_filter == undefined){
+    con.query('select * from products ', function (err, rows, fields) {
+      if (err) throw err
+    
+      rows.forEach(element => {
+        var x = new product(element.id, element.name, element.price,element.producer,element.description,element.quantity,element.category_id,element.image);
+        productsAll.push(x);
+      })
+      res.render('product/category',{products : productsAll, categories : categoriesAll,user: req.user});
+    });
+  }
+  else if (from == undefined && category_id_filter == undefined ){
+    con.query('select * from products ', function (err, rows, fields) {
+      if (err) throw err
+    
+      rows.forEach(element => {
+        var x = new product(element.id, element.name, element.price,element.producer,element.description,element.quantity,element.category_id,element.image);
+        productsAll.push(x);
+      })
+      res.render('product/category',{products : productsAll, categories : categoriesAll,user: req.user});
+    });
+  }
+  else if ( category_id_filter == undefined){
+    con.query('select * from products WHERE price >  '+from+' and price < '+to, function (err, rows, fields) {
+      if (err) throw err
+
+      rows.forEach(element => {
+        var x = new product(element.id, element.name, element.price,element.producer,element.description,element.quantity,element.category_id,element.image);
+        productsAll.push(x);
+      })
+      res.render('product/category',{products : productsAll, categories : categoriesAll,user: req.user});
+    });
+  }
+  else if (from == undefined && category_id_filter != undefined ){
+    con.query('select * from products WHERE   category_id = ' + category_id_filter , function (err, rows, fields) {
+      if (err) throw err
+    
+      rows.forEach(element => {
+        var x = new product(element.id, element.name, element.price,element.producer,element.description,element.quantity,element.category_id,element.image);
+        productsAll.push(x);
+      })
+      res.render('product/category',{products : productsAll, categories : categoriesAll,user: req.user});
+    });
+  }
+  else if ( category_id_filter != undefined){
+    con.query('select * from products WHERE price >  '+from+' and price < '+to + ' and category_id = ' + category_id_filter, function (err, rows, fields) {
+      if (err) throw err
+
+      rows.forEach(element => {
+        var x = new product(element.id, element.name, element.price,element.producer,element.description,element.quantity,element.category_id,element.image);
+        productsAll.push(x);
+      })
+      res.render('product/category',{products : productsAll, categories : categoriesAll,user: req.user});
+    });
+  }
+  
 };
 
 router.create = (req, res, next) => {
@@ -53,6 +112,7 @@ router.create = (req, res, next) => {
 };
 
 router.changeStatus = (req, res, next) => {
+  
   let id= req.params.id;
   let x, r;
   let sqlselect = "select * from categories where id="+id;
