@@ -71,7 +71,7 @@ router.order = async (req, res, next) => {
 
   var phone = req.body.phone;
   var address = req.body.address ;
-
+  var code = randomstring.generate(7);
   var sum_money = 0;
   var order_id = -1;
   var customer_id = req.user.id;
@@ -93,20 +93,17 @@ var created_at = dt.format('Y-m-d');
 
     }
     console.log("sum_money:"+i +sum_money );
-    var code = randomstring.generate(7);
-    let sql = 'INSERT INTO orders (customer_id,customer_name,status,sum_money,created_at,address,phone,code) VALUES (' + customer_id + ',"' + customer_name + '",' + 0 + ',' + sum_money + ',"' + created_at + '","' + address + '",' + phone + ',"' + code + '")';
+    let sql = 'INSERT INTO orders (customer_id,customer_name,status,sum_money,created_at,address,phone,code) VALUES (' + customer_id + ',"' + customer_name + '",' + 0 + ',' + sum_money + ',"' + created_at + '","' + address + '",' + phone + ',"'+code+'")';
     console.log(sql);
     await con.query(sql);
-    con.query('select id from orders where customer_id = ? and code = ? ', [customer_id],[code], function (err, rows, fields) {
+    con.query('select id from orders where customer_id = ? and code = ? ', [customer_id,code], function (err, rows, fields) {
       if (err) throw err
 
-      rows.forEach(rows => {
-        order_id = rows.id;
-       
-        console.log(sql);
-        for (var i = 0; i < productAll.length; i++) {
+      rows.forEach(element => {
+        order_id = element.id;
+        for (var i = 0; i < productSession.length; i++) {
           sql = 'INSERT INTO order_details (order_id,product_id,price,status,quantity) VALUES (' + order_id + ',' + productSession[i].id + ',' + productAll[i].price + ',' + 0 + ',' + productSession[i].quantity + ')';
-          console.log(sql)
+          console.log(sql);
           con.query(sql);
         }
 
@@ -114,7 +111,7 @@ var created_at = dt.format('Y-m-d');
       productSession=[];
       req.session.productSession = productSession;
       
-      res.redirect('back');
+      res.redirect('/category');
     });
   }
 
@@ -123,13 +120,12 @@ var created_at = dt.format('Y-m-d');
   }
 }
 else{
-  res.redirect('back');
+  res.redirect('/category');
 }
 }
 router.changeQuantity = (req,res,next)=>{
   var id_product = req.body.id_product;
   var quantity = req.body.quantity;
-  console.log("changequauaau"+id_product+":"+quantity);
 
   for(var i = 0;i<productSession.length;i++)
   {

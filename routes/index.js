@@ -10,7 +10,6 @@ var product = require("../controller/product");
 var usersController = require("../controller/user");
 var signupController = require('../controller/signup');
 var userDetailController = require('../controller/user-detail');
-var categoryController = require('../controller/category');
 
 /* GET home page. */
 router.get('/',index.home);
@@ -24,10 +23,11 @@ router.post('/thong-tin-tai-khoan',userDetailController.update);
 
 //danh mục sản phẩm
 router.get('/category',category.list);
+router.get('/category/search',category.getSearch);
+
 //chi tiet san pham
 router.get('/product/:id',product.list);
 router.post('/product',product.order);
-router.get('/category/search',categoryController.getSearch);
 
 
 // gio hang

@@ -128,8 +128,7 @@
                                        
                                         <div class="shipping_box">
                                             <h6></h6>
-                                            <input type="text" class="shipping_select" placeholder="phone">
-
+                                            <input type="text" class="shipping_select" placeholder="phone" name="phone">
                                             <input type="text" class="shipping_select" placeholder="address" name="address">
                                                 
                                             <input type="hidden" name="money" value="0" id="moneyy">
@@ -170,7 +169,7 @@
 	<script src="js/gmaps.min.js"></script>
     <script src="js/main.js"></script>
     <script>
-        $(".quantity-input").change(function(){
+        $(".quantity-input").change(function x(){
             var price = parseInt($(this).parent().parent().parent().find(".price").text());
             var id_product = $(this).parent().parent().parent().find(".price").find("input").val();
             console.log("js"+id_product);
