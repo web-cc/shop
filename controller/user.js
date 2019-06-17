@@ -103,7 +103,7 @@ router.check = (req, res) => {
       if (err) throw err
       let list = [];
       rows.forEach(element => {
-        var x = new customer(element.id, element.name, element.address, element.phoneNumber, element.email, element.password);
+        var x = new customer(element.id, element.name, element.address, element.phone, element.email, element.password);
                 list.push(x);
 
       });
@@ -119,16 +119,16 @@ router.check = (req, res) => {
 }
 
 router.checkPhone = (req, res) => {
-  let phoneNumber = req.body.data;
-  if (phoneNumber == undefined || phoneNumber == "") {
+  let phone = req.body.data;
+  if (phone == undefined || phone == "") {
     res.send("3");
   } else {
 
-    con.query('select * from customers WHERE phoneNumber="' + phoneNumber + '"', function (err, rows, fields) {
+    con.query('select * from customers WHERE phone="' + phone + '"', function (err, rows, fields) {
       if (err) throw err
       let list = [];
       rows.forEach(element => {
-        var x = new customer(element.id, element.name, element.address, element.phoneNumber, element.email, element.password);
+        var x = new customer(element.id, element.name, element.address, element.phone, element.email, element.password);
         list.push(x);
 
       });

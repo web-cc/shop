@@ -34,11 +34,8 @@ router.get('/login',login.home); //dang nhap
 router.post('/user/login',usersController.signin); // dang nhap
 router.get('/signup',signupController.getIndex); //dang ky
 router.post('/user/signup',usersController.signup); //dang ky
-
-
-
-
-
+router.get('/thong-tin-tai-khoan', requiresLogin, userDetailController.getDetail);
+router.post('/thong-tin-tai-khoan', requiresLogin, userDetailController.update);
 
 
 

@@ -7,7 +7,7 @@ const customer = require('./../model/customer');
     if (err) throw err
   
     rows.forEach(element => {
-      var x = new customer(element.id, element.name, element.phoneNumber, element.address, element.email, element.password );
+      var x = new customer(element.id, element.name, element.phone, element.address, element.email, element.password );
       customersAll.push(x);
     })
   });
@@ -24,17 +24,17 @@ router.getDetail = (req, res, next) => {
   console.log(sql);
   con.query(sql, function(err, results, fields){
     console.log(results[0]);
-    var x = new customer(results[0].id, results[0].name, results[0].phoneNumber, results[0].address, results[0].email, results[0].password);
-    res.render('user/user-detail',{customer : x,user: req.user.id});
+    var x = new customer(results[0].id, results[0].name, results[0].phone, results[0].address, results[0].email, results[0].password);
+    res.render('user/user-detail',{customers : x,user: req.user.id});
     
   });
 };
 router.update=(req,res,next)=>{
   let id = req.user.id;
-  let sql='UPDATE customers SET name="'+req.body.name+'",phoneNumber="'+req.body.phone+'",place="'+req.body.address+'" WHERE id ='+id;
+  let sql='UPDATE customers SET name="'+req.body.name+'",phone="'+req.body.phone+'",address="'+req.body.address+'" WHERE id ='+id;
   con.query(sql);
   console.log(sql);
-  res.redirect('thong-tin-tai-khoan');
+  res.redirect('/thong-tin-tai-khoan');
 }
 
 module.exports = router;
