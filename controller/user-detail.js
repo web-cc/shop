@@ -34,7 +34,7 @@ router.update=(req,res,next)=>{
   let sql='UPDATE customers SET name="'+req.body.name+'",phone="'+req.body.phone+'",address="'+req.body.address+'" WHERE id ='+id;
   con.query(sql);
   console.log(sql);
-  res.redirect('/thong-tin-tai-khoan');
+  res.redirect('/');
 }
 
 module.exports = router;

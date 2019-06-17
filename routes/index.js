@@ -16,6 +16,9 @@ var categoryController = require('../controller/category');
 router.get('/',index.home);
 router.get('/checkout',checkout.home);
 router.get('/user',usersController.user);
+router.get('/thong-tin-tai-khoan',userDetailController.getDetail);
+router.post('/thong-tin-tai-khoan',userDetailController.update);
+
 // router.post('/tai-khoan/check-account',isLoggedIn,usersController.check);
 // router.post('/tai-khoan/check-phone',isLoggedIn,usersController.checkPhone);
 
@@ -29,14 +32,19 @@ router.get('/category/search',categoryController.getSearch);
 
 // gio hang
 router.get('/cart',cart.list);
+router.post('/cart',requiresLogin,cart.order);
+router.post('/cart/change-quantity',requiresLogin,cart.changeQuantity);
+
+
+
 router.get('/logout',usersController.logout);//dang xuat
 
 router.get('/login',login.home); //dang nhap
 router.post('/user/login',usersController.signin); // dang nhap
 router.get('/signup',signupController.getIndex); //dang ky
 router.post('/user/signup',usersController.signup); //dang ky
-router.get('/thong-tin-tai-khoan', requiresLogin, userDetailController.getDetail);
-router.post('/thong-tin-tai-khoan', requiresLogin, userDetailController.update);
+router.get('/profile', requiresLogin, userDetailController.getDetail);
+router.post('/profile', requiresLogin, userDetailController.update);
 
 
 

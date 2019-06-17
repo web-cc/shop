@@ -82,6 +82,7 @@
                                 </td>
                                 <td class="price">
                                     <h5 ><%= productAll[i].price %> đ</h5>
+                                    <input type="hidden" value="<%= productAll[i].id %>">
                                 </td>
                                 <td class="quantity">
                                     <div class="product_count">
@@ -97,24 +98,7 @@
                             </tr>
                             <%}%>
 
-                            <tr class="bottom_button">
-                                <td>
-                                    <a class="gray_btn" href="#">Cập nhật giỏ hàng</a>
-                                </td>
-                                <td>
-
-                                </td>
-                                <td>
-
-                                </td>
-                                <td>
-                                    <div class="cupon_text d-flex align-items-center">
-                                        <input type="text" placeholder="Coupon Code">
-                                        <a class="primary-btn" href="#">Ứng dụng</a>
-                                        <a class="gray_btn" href="#">Phiếu giảm giá</a>
-                                    </div>
-                                </td>
-                            </tr>
+                            
                             <tr>
                                 <td>
 
@@ -140,46 +124,24 @@
                                     <h5>Giao hàng</h5>
                                 </td>
                                 <td>
-                                    <div class="shipping_box">
-                                        <ul class="list">
-                                            <li><a href="#">Giá thấp nhất: $5.00</a></li>
-                                            <li><a href="#">Miễn phí giao hàng</a></li>
-                                            <li><a href="#">Giá thấp nhất: $10.00</a></li>
-                                            <li class="active"><a href="#">Giao hàng tận nơi: $2.00</a></li>
-                                        </ul>
-                                        <h6>Calculate Shipping <i class="fa fa-caret-down" aria-hidden="true"></i></h6>
-                                        <select class="shipping_select">
-                                            <option value="1">Bangladesh</option>
-                                            <option value="2">India</option>
-                                            <option value="4">Pakistan</option>
-                                        </select>
-                                        <select class="shipping_select">
-                                            <option value="1">Chọn một quốc gia</option>
-                                            <option value="2">Chọn một quốc gia</option>
-                                            <option value="4">Chọn một quốc gia</option>
-                                        </select>
-                                        <input type="text" placeholder="Postcode/Zipcode">
-                                        <a class="gray_btn" href="#">Cập nhật chi ti</a>
-                                    </div>
+                                    <form action="/cart" method="POST">
+                                       
+                                        <div class="shipping_box">
+                                            <h6></h6>
+                                            <input type="text" class="shipping_select" placeholder="phone">
+
+                                            <input type="text" class="shipping_select" placeholder="address" name="address">
+                                                
+                                            <input type="hidden" name="money" value="0" id="moneyy">
+                                            </div>
+                                        
+                                        <button id="btnSubmit" type="submit"
+                                            class="checkout_btn_inner d-flex align-items-center">
+                                            Đặt hàng
+                                        </button>
                                 </td>
                             </tr>
-                            <tr class="out_button_area">
-                                <td>
-
-                                </td>
-                                <td>
-
-                                </td>
-                                <td>
-
-                                </td>
-                                <td>
-                                    <div class="checkout_btn_inner d-flex align-items-center">
-                                        <a class="gray_btn" href="#">Tiếp tục mua sắm</a>
-                                        <a class="primary-btn" href="#">Tiến hành kiểm tra</a>
-                                    </div>
-                                </td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>
@@ -210,6 +172,8 @@
     <script>
         $(".quantity-input").change(function(){
             var price = parseInt($(this).parent().parent().parent().find(".price").text());
+            var id_product = $(this).parent().parent().parent().find(".price").find("input").val();
+            console.log("js"+id_product);
 			var quantity = $(this).val();
             var sum =+ parseInt(price) * (parseInt(quantity) ) + "đ";
             $(this).parent().parent().parent().find(".sum").find("h5").html("");
@@ -221,6 +185,21 @@
             })
             $("#total-amount").html("");
             $("#total-amount").append(total_amount);
+            $.ajax({
+				url: "/cart/change-quantity",
+				type: "POST",
+				contentType: 'application/x-www-form-urlencoded',
+				data: { id_product: id_product,
+						quantity: parseInt(quantity) 
+						},
+				success: function (response) {
+					
+
+				},
+				error: function () {
+					alert("Lỗi");
+				}
+			});
 
   });
     </script>
