@@ -16,11 +16,11 @@ var productController = require('../controller/product');
 router.get('/',index.home);
 router.get('/checkout',checkout.home);
 router.get('/user',usersController.user);
-router.post('/tai-khoan/check-account',isLoggedIn,usersController.check);
-router.post('/tai-khoan/check-phone',isLoggedIn,usersController.checkPhone);
+// router.post('/tai-khoan/check-account',isLoggedIn,usersController.check);
+// router.post('/tai-khoan/check-phone',isLoggedIn,usersController.checkPhone);
 
 //danh mục sản phẩm
-router.get('/category',category.list);
+router.get('/category',requiresLogin,category.list);
 //chi tiet san pham
 router.get('/product/:id',product.list);
 router.post('/product',product.order);
@@ -43,11 +43,20 @@ router.post('/user/signup',usersController.signup); //dang ky
 
 
 
-function isLoggedIn(req, res, next) {
+// function isLoggedIn(req, res, next) {
 
-	if (req.isAuthenticated())
-		return next();
+// 	if (req.isAuthenticated())
+// 		return next();
 
-    res.redirect('/user');
-}
+//     res.redirect('/user');
+// }
+function requiresLogin(req, res, next) {
+	if (req.isAuthenticated()) {
+	  return next();
+	} else {
+		req.flash('loginMessage', 'You must be logged in to view this page.')
+		return res.redirect('/login');
+	}
+  }
+
 module.exports = router;
