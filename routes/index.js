@@ -10,7 +10,7 @@ var product = require("../controller/product");
 var usersController = require("../controller/user");
 var signupController = require('../controller/signup');
 var userDetailController = require('../controller/user-detail');
-var productController = require('../controller/product');
+var categoryController = require('../controller/category');
 
 /* GET home page. */
 router.get('/',index.home);
@@ -20,10 +20,11 @@ router.get('/user',usersController.user);
 // router.post('/tai-khoan/check-phone',isLoggedIn,usersController.checkPhone);
 
 //danh mục sản phẩm
-router.get('/category',requiresLogin,category.list);
+router.get('/category',category.list);
 //chi tiet san pham
 router.get('/product/:id',product.list);
 router.post('/product',product.order);
+router.get('/category/search',categoryController.getSearch);
 
 
 // gio hang

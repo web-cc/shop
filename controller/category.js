@@ -11,7 +11,8 @@ router.list = (req, res, next) => {
   var from = req.query.from;
   var to = req.query.to;
   var category_id_filter = req.query.categoryId;
-  console.log(category_id_filter);
+
+  console.log(category_id_filter);  
   console.log(from);
   console.log(to);
  
@@ -83,7 +84,6 @@ router.list = (req, res, next) => {
 
 router.create = (req, res, next) => {
   let name = req.body.name;
-  let status = 1;
   let id = req.body.id;
   if(id==""){
     id=0;
@@ -133,5 +133,44 @@ router.changeStatus = (req, res, next) => {
   
   res.redirect('/gian-hang');
 }
+router.getSearch = (req, res, next) => {
+  var name = req.query.name;
+
+  productsAll = [];
+  categoriesAll = [];
+    con.query('select * from categories', function (err, rows, fields) {
+      if (err) throw err
+
+      rows.forEach(element => {
+        var x = new category(element.id, element.name, element.description);
+        categoriesAll.push(x);
+      })
+    });
+    
+    
+  if (name == undefined){
+    con.query('select * from products ', function (err, rows, fields) {
+      if (err) throw err
+    
+      rows.forEach(element => {
+        var x = new product(element.id, element.name, element.price,element.producer, element.description, element.quantity, element.category_id, element.image);
+        productsAll.push(x);
+      })
+      res.render('product/category',{products : productsAll, categories : categoriesAll,user: req.user});
+    });
+  }
+  else{
+    con.query('select * from products where lower(name) like lower("%'+name+'%")' , function (err, rows, fields) {
+      if (err) throw err
+    
+      rows.forEach(element => {
+        var x = new product(element.id, element.name, element.price,element.producer, element.description, element.quantity, element.category_id, element.image);
+        productsAll.push(x);
+      })
+      res.render('product/category',{products : productsAll, categories : categoriesAll,user: req.user});
+    });
+  }
+  
+};
 
 module.exports = router;
