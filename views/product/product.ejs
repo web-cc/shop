@@ -10,7 +10,7 @@
 	<meta name="author" content="CodePixar">
 	<!-- Meta Description -->
 	<meta name="description" content="">
-	<!-- Meta Keyword -->
+	<!-- Meta Keyword -->		
 	<meta name="keywords" content="">
 	<!-- meta character set -->
 	<meta charset="UTF-8">
@@ -87,7 +87,7 @@
 							
 						</div>
 						<div class="card_area d-flex align-items-center">
-							<a class="primary-btn" >Thêm vào giỏ</a>
+							<a onclick="order(<%= product.id %>)" href="" class="primary-btn" >Thêm vào giỏ</a>
 							<a class="icon_btn" href="/#"><i class="lnr lnr lnr-diamond"></i></a>
 							<a class="icon_btn" href="/#"><i class="lnr lnr lnr-heart"></i></a>
 						</div>
@@ -462,7 +462,21 @@
 	<script src="/https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
 	<script src="/js/gmaps.min.js"></script>
 	<script src="/js/main.js"></script>
-
+<script>
+		function order(id) {
+			$.ajax({
+				url: "/product",
+				type: "POST",
+				contentType: 'application/x-www-form-urlencoded',
+				data: { id_product: id},
+				success: function (response) {
+				},
+				error: function () {
+					alert("Lỗi");
+				}
+			});
+		}
+</script>  
 </body>
 
 </html>

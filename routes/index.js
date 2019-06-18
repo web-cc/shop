@@ -48,14 +48,6 @@ router.post('/profile', requiresLogin, userDetailController.update);
 
 
 
-
-// function isLoggedIn(req, res, next) {
-
-// 	if (req.isAuthenticated())
-// 		return next();
-
-//     res.redirect('/user');
-// }
 function requiresLogin(req, res, next) {
 	if (req.isAuthenticated()) {
 	  return next();
